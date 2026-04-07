@@ -1,4 +1,16 @@
-from flask import Flask, render_template, jsonify
+import os
+from flask import Flask, render_template
+
+# 1. Get the absolute path to the directory this file is in
+base_dir = os.path.abspath(os.path.dirname(__file__))
+
+# 2. Append the 'templates' folder to that path
+template_dir = os.path.join(base_dir, 'templates')
+
+# 3. Tell Flask exactly where to look
+app = Flask(__name__, template_folder=template_dir)
+
+# ... the rest of your app.py code ...from flask import Flask, render_template, jsonify
 import os, csv
 
 app = Flask(__name__)
