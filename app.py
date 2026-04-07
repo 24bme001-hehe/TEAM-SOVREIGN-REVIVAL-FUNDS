@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template
+import csv
+from flask import Flask, render_template, jsonify
 
 # 1. Get the absolute path to the directory this file is in
 base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -7,13 +8,8 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 # 2. Append the 'templates' folder to that path
 template_dir = os.path.join(base_dir, 'templates')
 
-# 3. Tell Flask exactly where to look
+# 3. Initialize Flask AND tell it exactly where to look for templates
 app = Flask(__name__, template_folder=template_dir)
-
-# ... the rest of your app.py code ...from flask import Flask, render_template, jsonify
-import os, csv
-
-app = Flask(__name__)
 
 DEMO_SPONSORS = [
     {"name": "Rahul Sharma",  "amount": 5000},
@@ -30,7 +26,8 @@ DEMO_SPONSORS = [
     {"name": "Meera Iyer",    "amount": 150},
 ]
 
-CSV_FILE = os.path.join(os.path.dirname(__file__), "sponsors.csv")
+# 4. Use the absolute base_dir for your CSV file too, so Vercel can find it
+CSV_FILE = os.path.join(base_dir, "sponsors.csv")
 
 def get_sponsors():
     if os.path.exists(CSV_FILE):
