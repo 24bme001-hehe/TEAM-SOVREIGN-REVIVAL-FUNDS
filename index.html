@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team Sovereign — eBaja Sponsors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&family=Bebas+Neue&family=Exo+2:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue:   #1a3a8f;
+      --blue2:  #0e5ef5;
+      --silver: #c8d8e8;
+      --gold:   #f0c040;
+      --white:  #ffffff;
+      --bg:     #080e1a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Exo 2', sans-serif;
+      overflow-x: hidden;
+      color: var(--white);
+    }
+
+    /* ── BACKGROUND ── */
+    .bg-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+    .bg-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: blur(2px) brightness(0.35) saturate(1.4);
+      opacity: 0.55;
+    }
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(8,14,26,0.75) 0%,
+        rgba(14,94,245,0.15) 50%,
+        rgba(8,14,26,0.85) 100%);
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1rem 4rem;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      width: 100%;
+    }
+    .team-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      letter-spacing: 0.4em;
+      color: var(--blue2);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      background: linear-gradient(90deg, var(--silver) 20%, var(--white) 50%, var(--blue2) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      color: var(--silver);
+      letter-spacing: 0.2em;
+      margin-top: 0.6rem;
+      opacity: 0.8;
+    }
+
+    /* divider */
+    .divider {
+      width: min(500px, 80%);
+      height: 2px;
+      margin: 1.5rem auto;
+      background: linear-gradient(90deg, transparent, var(--blue2), var(--gold), var(--blue2), transparent);
+    }
+
+    /* ── STATS BAR ── */
+    .stats {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .stat-box {
+      text-align: center;
+      background: rgba(14,94,245,0.12);
+      border: 1px solid rgba(14,94,245,0.3);
+      border-radius: 12px;
+      padding: 0.8rem 1.8rem;
+      backdrop-filter: blur(8px);
+    }
+    .stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--silver);
+      opacity: 0.75;
+      margin-top: 0.2rem;
+    }
+
+    /* ── COLLAGE ── */
+    .collage {
+      width: min(960px, 96%);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem 1.2rem;
+      padding: 2rem 1.5rem;
+      background: rgba(8,14,26,0.55);
+      border: 1px solid rgba(14,94,245,0.2);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 60px rgba(14,94,245,0.15), inset 0 0 40px rgba(0,0,0,0.3);
+    }
+
+    .sponsor-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+      cursor: default;
+      transition: all 0.25s ease;
+      text-shadow: 0 2px 12px rgba(14,94,245,0.5);
+      padding: 0.1em 0.15em;
+      border-radius: 4px;
+      position: relative;
+    }
+    .sponsor-name:hover {
+      transform: scale(1.08) translateY(-2px);
+      text-shadow: 0 4px 24px rgba(240,192,64,0.7), 0 0 40px rgba(14,94,245,0.6);
+      z-index: 10;
+    }
+    /* Tooltip on hover */
+    .sponsor-name::after {
+      content: attr(data-amount);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.85);
+      background: rgba(8,14,26,0.95);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .sponsor-name:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Tier colours */
+    .tier-1 { color: var(--gold);   }   /* top sponsor  */
+    .tier-2 { color: #e8e8ff;       }   /* high        */
+    .tier-3 { color: var(--silver); }   /* mid         */
+    .tier-4 { color: #8ab0d0;       }   /* low         */
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--silver);
+      opacity: 0.45;
+      letter-spacing: 0.15em;
+    }
+    footer a { color: var(--blue2); text-decoration: none; }
+
+    /* ── SCROLL ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .sponsor-name {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .stats { gap: 1rem; }
+      .stat-box { padding: 0.6rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background ATV image -->
+<div class="bg-wrap">
+  <img src="/static/images/atv.png" alt="Team Sovereign ATV eBaja"/>
+  <div class="bg-overlay"></div>
+</div>
+
+<div class="page">
+  <header>
+    <div class="team-label">Team Sovereign</div>
+    <div class="title">eBaja Sponsors</div>
+    <div class="subtitle">ATREUS 3.0 &nbsp;·&nbsp; SAE eBaja India</div>
+    <div class="divider"></div>
+  </header>
+
+  <!-- Stats -->
+  {% set total = namespace(v=0) %}
+  {% for s in sponsors %}{% set total.v = total.v + s.amount %}{% endfor %}
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-val">{{ sponsors|length }}</div>
+      <div class="stat-lbl">SPONSORS</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">₹{{ "{:,.0f}".format(total.v) }}</div>
+      <div class="stat-lbl">TOTAL RAISED</div>
+    </div>
+    {% if sponsors %}
+    <div class="stat-box">
+      <div class="stat-val">{{ sponsors[0].name.split()[0] }}</div>
+      <div class="stat-lbl">TOP SPONSOR</div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Collage -->
+  <div class="collage">
+    {% if sponsors %}
+      {% set max_amt = sponsors[0].amount %}
+      {% set min_amt = sponsors[-1].amount %}
+      {% set range   = (max_amt - min_amt) if (max_amt - min_amt) > 0 else 1 %}
+
+      {% for s in sponsors %}
+        {# Font size: scale from 1.1rem (min) to 5.2rem (max) #}
+        {% set ratio   = (s.amount - min_amt) / range %}
+        {% set fs_px   = (ratio * 72 + 17) | round | int %}
+
+        {# Tier class for color #}
+        {% if ratio >= 0.75 %}
+          {% set tier = "tier-1" %}
+        {% elif ratio >= 0.45 %}
+          {% set tier = "tier-2" %}
+        {% elif ratio >= 0.2 %}
+          {% set tier = "tier-3" %}
+        {% else %}
+          {% set tier = "tier-4" %}
+        {% endif %}
+
+        <span
+          class="sponsor-name {{ tier }}"
+          style="font-size: {{ fs_px }}px; animation-delay: {{ loop.index0 * 0.05 }}s;"
+          data-amount="₹{{ '{:,.0f}'.format(s.amount) }}"
+          title="{{ s.name }} — ₹{{ '{:,.0f}'.format(s.amount) }}"
+        >{{ s.name }}</span>
+      {% endfor %}
+    {% else %}
+      <p style="color:var(--silver); opacity:0.6; letter-spacing:0.2em;">No sponsors yet. Be the first!</p>
+    {% endif %}
+  </div>
+
+  <!-- CTA -->
+  <div style="margin-top:2rem; text-align:center;">
+    <a
+      href="https://docs.google.com/forms/d/e/1FAIpQLSc1fMKYqQpiBFFi_T4JjJ79QMnrMxwUqFx30XtEVB9u9uR3Hg/viewform"
+      target="_blank"
+      style="
+        display: inline-block;
+        background: linear-gradient(135deg, var(--blue2), #0a3db0);
+        color: #fff;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.3rem;
+        letter-spacing: 0.2em;
+        padding: 0.75rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 4px 24px rgba(14,94,245,0.4);
+        transition: transform 0.2s, box-shadow 0.2s;
+      "
+      onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(14,94,245,0.6)'"
+      onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(14,94,245,0.4)'"
+    >
+      ➕ &nbsp;BECOME A SPONSOR
+    </a>
+    <p style="margin-top:1rem; font-size:0.78rem; color:var(--silver); opacity:0.55; letter-spacing:0.12em;">
+      Your name will appear here after payment is confirmed
+    </p>
+  </div>
+
+  <footer>
+    <p>Auto-refreshes every 5 minutes &nbsp;·&nbsp; Team Sovereign &nbsp;·&nbsp; ATREUS 3.0</p>
+  </footer>
+</div>
+
+<script>
+  // Auto-refresh every 5 minutes so new sponsors appear live
+  setTimeout(() => location.reload(), 5 * 60 * 1000);
+</script>
+</body>
+</html>
